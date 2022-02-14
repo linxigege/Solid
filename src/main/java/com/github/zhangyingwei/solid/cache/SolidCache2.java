@@ -2,6 +2,7 @@ package com.github.zhangyingwei.solid.cache;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +14,8 @@ public class SolidCache2 {
     public SolidCache2() {
         this.startCleaner();
     }
+
+//    public void cache(String key,Object)
 
     private void startCleaner() {
         new Thread(() -> {
@@ -29,7 +32,17 @@ public class SolidCache2 {
 
     private void cleanCache(){
         List<String> timeOutKeys = new ArrayList<>();
-        cacheTimeout.entrySet()
+        for (Map.Entry<String, Long> entry : cacheTimeout.entrySet()) {
+            long out = entry.getValue();
+            if (System.currentTimeMillis()>out){
+                timeOutKeys.add(entry.getKey());
+            }
+        }
+
+        for (String timeOutKey : timeOutKeys) {
+            cache.remove(timeOutKey);
+            cacheTimeout.remove(timeOutKey);
+        }
     }
 
 }
