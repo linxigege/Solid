@@ -3,7 +3,14 @@ package com.github.zhangyingwei.solid.common;
 import com.github.zhangyingwei.solid.SolidContext2;
 import com.github.zhangyingwei.solid.config.FileTemplateResourceLoader2;
 import com.github.zhangyingwei.solid.config.SolidConfiguration2;
+import com.github.zhangyingwei.solid.items.Block;
+import com.github.zhangyingwei.solid.items.Block2;
+import com.github.zhangyingwei.solid.items.process.ForProcessBlock;
 import com.github.zhangyingwei.solid.template.TemplateResolver2;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zhangyw
@@ -23,5 +30,31 @@ public class SolidUtils2 {
         resolver.setPrefix(Constants.LAYOUT_BASE_PATH);
         resolver.setSuffix(fromContext.getResourcesLoader().getSuffix());
         return resolver;
+    }
+
+    public static String formateAsNomal(String content) {
+        return removeExtraSpaces(content.trim());
+    }
+
+    private static String removeExtraSpaces(String content) {
+        while (content.indexOf("  ") >= 0) {
+            content = content.replaceAll("  ", " ");
+        }
+        return content;
+    }
+
+    public static String subMarkToTemplate(String mark, String leftMark, String rightMark) {
+        return mark.substring(leftMark.length(), (mark.length() - rightMark.length()));
+    }
+
+    public static Block2 routeProcessBlock(String template,SolidContext2 context2){
+        List<String> commandItemList = Arrays.stream(template.trim().split(" ")).collect(Collectors.toList());
+        commandItemList.remove(0);
+        commandItemList.remove(commandItemList.size()-1);
+        String command = String.join(" ", commandItemList);
+
+        if (command.startsWith(Constants2.TAG_FOR)){
+            return new ForProcessBlock()
+        }
     }
 }

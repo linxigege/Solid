@@ -14,11 +14,16 @@ import java.util.Map;
 public class Template2 implements SolidTemplate2 {
 
     private SolidConfiguration2 configuration2;
-    private TemplateResolver2 templateResolver2;
+    private TemplateParser templateResolver2;
     private String source;
     private String contentType = Constants.CONTENT_TYPE;
     private List<Block2> resultBlocks;
     private Header2 header2;
+
+    public Template2(SolidConfiguration2 configuration2,String source){
+        this.configuration2 = configuration2;
+//        this.templat
+    }
 
     @Override
     public void bind(String key, Object value) {

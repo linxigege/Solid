@@ -73,4 +73,21 @@ public class StringConveyor2 {
         }
         return this;
     }
+
+    public StringConveyor2 trimLeft() {
+        if (this.length() > 0) {
+            char cut = template.charAt(this.globalToIndex);
+            while (cut == ' ' && this.length() > 0) {
+                this.globalToIndex++;
+                if (this.length() > 0) {
+                    cut = template.charAt(this.globalToIndex);
+                }
+            }
+        }
+        return this;
+    }
+
+    public boolean startWith(String str){
+        return this.string().startsWith(str);
+    }
 }
