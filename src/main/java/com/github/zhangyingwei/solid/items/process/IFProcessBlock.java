@@ -30,7 +30,7 @@ public class IFProcessBlock extends ProcessBlock {
     }
 
     private void splitTemplateToIfItems() {
-        String itemsLine = SolidUtils.subMarkToTemplate(super.topMark,super.leftMark,super.rightMark);
+        String itemsLine = SolidUtils.subMarkToTemplate(super.topMark, super.leftMark, super.rightMark);
         TemplateParser.TemplateFlow templateFlow = new TemplateParser.TemplateFlow(itemsLine);
         while (templateFlow.isNotEmpty()) {
             if (templateFlow.startWith("and")) {
@@ -66,6 +66,7 @@ public class IFProcessBlock extends ProcessBlock {
 
     /**
      * 验证条件是否为 true
+     *
      * @return
      */
     private boolean valid() {
@@ -79,6 +80,7 @@ public class IFProcessBlock extends ProcessBlock {
 
     /**
      * add else if block
+     *
      * @param elseBlock
      */
     public void addElseIfBlock(ElsIFProcessBlock elseBlock) {
@@ -106,10 +108,12 @@ public class IFProcessBlock extends ProcessBlock {
 
     abstract class SolidIfItem {
         String template;
+
         public SolidIfItem(String template) {
             this.template = template;
         }
     }
+
     /**
      * 条件元素类
      */
@@ -137,14 +141,14 @@ public class IFProcessBlock extends ProcessBlock {
          */
         //TODO
         void formate() {
-            String templateText = template.replaceFirst(tag,"").replaceAll(" ", "");
+            String templateText = template.replaceFirst(tag, "").replaceAll(" ", "");
             if (templateText.contains("=") || templateText.contains(">") || templateText.contains("<")) {
                 String spliter = "";
                 if (templateText.contains("==")) {
                     spliter = "==";
                 } else if (templateText.contains("!=")) {
                     spliter = "!=";
-                }else if (templateText.contains(">=")) {
+                } else if (templateText.contains(">=")) {
                     spliter = ">=";
                 } else if (templateText.contains("<=")) {
                     spliter = "<=";
@@ -180,7 +184,7 @@ public class IFProcessBlock extends ProcessBlock {
             } else if (first instanceof SolidResult && second instanceof SolidResult) {
                 if (first instanceof WowResult || second instanceof WowResult) {
                     return new IfItemCompare(false);
-                }else if (this.getFirst() instanceof NumResult || this.getSecond() instanceof NumResult) {
+                } else if (this.getFirst() instanceof NumResult || this.getSecond() instanceof NumResult) {
                     BigDecimal bfrist = new BigDecimal(this.getFirst().getResult().toString());
                     BigDecimal bsecond = new BigDecimal(this.getSecond().getResult().toString());
                     if (this.symbol.equals("==")) {

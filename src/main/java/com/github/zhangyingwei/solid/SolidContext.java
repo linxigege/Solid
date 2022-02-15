@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class SolidContext {
     private Map<String, Object> params = new HashMap<String, Object>();
-    private Map<String, SolidMethod> methodMap = new HashMap<String,SolidMethod>();
+    private Map<String, SolidMethod> methodMap = new HashMap<String, SolidMethod>();
     private SolidTemplateResourcesLoader resourcesLoader;
 
     public SolidContext() {
@@ -34,6 +34,10 @@ public class SolidContext {
         return params;
     }
 
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
+
     public SolidMethod getMethod(String key) {
         return methodMap.get(key);
     }
@@ -42,23 +46,19 @@ public class SolidContext {
         this.params.remove(itemName);
     }
 
-    public void setResourcesLoader(SolidTemplateResourcesLoader resourcesLoader) {
-        this.resourcesLoader = resourcesLoader;
-    }
-
     public SolidTemplateResourcesLoader getResourcesLoader() {
         return resourcesLoader;
     }
 
-    public void setParams(Map<String, Object> params) {
-        this.params = params;
-    }
-
-    public void setMethodMap(Map<String, SolidMethod> methodMap) {
-        this.methodMap = methodMap;
+    public void setResourcesLoader(SolidTemplateResourcesLoader resourcesLoader) {
+        this.resourcesLoader = resourcesLoader;
     }
 
     public Map<String, SolidMethod> getMethodMap() {
         return methodMap;
+    }
+
+    public void setMethodMap(Map<String, SolidMethod> methodMap) {
+        this.methodMap = methodMap;
     }
 }

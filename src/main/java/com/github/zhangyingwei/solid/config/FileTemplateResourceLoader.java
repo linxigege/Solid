@@ -4,8 +4,6 @@ import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.common.SolidUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FileTemplateResourceLoader implements SolidTemplateResourcesLoader {
     private String basePath;
@@ -36,11 +34,12 @@ public class FileTemplateResourceLoader implements SolidTemplateResourcesLoader 
     }
 
     private String readContentFromFile(String filePath) {
-        return SolidUtils.readContentFromFile(filePath,Constants.CHAR_SET_UTF_8);
+        return SolidUtils.readContentFromFile(filePath, Constants.CHAR_SET_UTF_8);
     }
 
     /**
      * 根据 basepath suffix prefix sources 等拼接文件路径
+     *
      * @param source
      * @return
      */
@@ -58,23 +57,23 @@ public class FileTemplateResourceLoader implements SolidTemplateResourcesLoader 
     }
 
     @Override
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    @Override
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
-    }
-
-    @Override
     public String getPrefix() {
         return this.prefix;
     }
 
     @Override
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    @Override
     public String getSuffix() {
         return this.suffix;
+    }
+
+    @Override
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
     }
 
     @Override

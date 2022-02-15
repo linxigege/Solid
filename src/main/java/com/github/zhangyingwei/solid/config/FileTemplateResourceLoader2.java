@@ -49,23 +49,23 @@ public class FileTemplateResourceLoader2 implements SolidTemplateResourcesLoader
     }
 
     @Override
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    @Override
-    public void setSuffix(String suffix) {
-        this.suffix = suffix;
-    }
-
-    @Override
     public String getPrefix() {
         return prefix;
     }
 
     @Override
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    @Override
     public String getSuffix() {
         return suffix;
+    }
+
+    @Override
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
     }
 
     @Override

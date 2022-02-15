@@ -4,14 +4,10 @@ import com.github.zhangyingwei.solid.SolidContext;
 import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.common.SolidUtils;
 import com.github.zhangyingwei.solid.common.StringConveyor;
-import com.github.zhangyingwei.solid.config.SolidConfiguration;
-import com.github.zhangyingwei.solid.items.object.ObjectBlock;
 import com.github.zhangyingwei.solid.result.SolidResult;
 import com.github.zhangyingwei.solid.result.StringResult;
 import com.github.zhangyingwei.solid.template.Template;
 import com.github.zhangyingwei.solid.template.TemplateResolver;
-
-import java.util.Arrays;
 
 /**
  * @author zhangyw
@@ -33,7 +29,7 @@ public class IncludeProcessBlock extends ProcessBlock {
     private void init() {
         String template = SolidUtils.subMarkToTemplate(SolidUtils.formateAsNomal(super.topMark), super.leftMark, super.rightMark);
         StringConveyor conveyor = new StringConveyor(template);
-        conveyor.getUntil(super.tag,true);
+        conveyor.getUntil(super.tag, true);
         this.url = this.getIncludeTemplateUrl(conveyor);
         this.templateContent = conveyor.trimLeft().string();
         this.includeTemplate = this.resolver.resolve(this.url);
@@ -65,12 +61,12 @@ public class IncludeProcessBlock extends ProcessBlock {
     private void bind() {
         StringConveyor conveyor = new StringConveyor(templateContent);
         while (conveyor.length() > 0) {
-            String key = conveyor.getUntil("=",false).result().trim();
+            String key = conveyor.getUntil("=", false).result().trim();
             conveyor.getUntil("=", true);
             conveyor.trimLeft();
             Object value = null;
             if (conveyor.startWith("\"")) {
-                value = conveyor.getFromTo("\"","\"").result();
+                value = conveyor.getFromTo("\"", "\"").result();
             } else if (conveyor.trimLeft().startWith("{{")) {
                 value = conveyor.getBetween("{{", "}}").result().trim();
                 value = SolidUtils.getFromPlaceholderOrNot(super.context, value.toString());

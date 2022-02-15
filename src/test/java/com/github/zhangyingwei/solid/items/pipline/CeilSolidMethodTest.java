@@ -7,8 +7,6 @@ import com.github.zhangyingwei.solid.template.TemplateResolver;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class CeilSolidMethodTest {
 
     @Test

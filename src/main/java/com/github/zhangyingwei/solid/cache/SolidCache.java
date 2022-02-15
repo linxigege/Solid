@@ -9,11 +9,12 @@ import java.util.concurrent.TimeUnit;
 public class SolidCache {
     private ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<String, Object>();
     private ConcurrentHashMap<String, Long> cacheTimeout = new ConcurrentHashMap<String, Long>();
+
     public SolidCache() {
         this.startCleaner();
     }
 
-    public void cache(String key,Object value) {
+    public void cache(String key, Object value) {
         cache.put(key, value);
     }
 
@@ -33,7 +34,7 @@ public class SolidCache {
         return System.currentTimeMillis() > cacheTimeout.get(key);
     }
 
-    public void cache(String key,Object value,long timeout) {
+    public void cache(String key, Object value, long timeout) {
         cache.put(key, value);
         cacheTimeout.put(key, System.currentTimeMillis() + timeout);
 //        System.out.println("cache:" + key);

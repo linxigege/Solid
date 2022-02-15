@@ -6,8 +6,6 @@ import com.github.zhangyingwei.solid.template.Template;
 import com.github.zhangyingwei.solid.template.TemplateResolver;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class DateSolidMethodTest {
 
     @Test
@@ -16,7 +14,7 @@ public class DateSolidMethodTest {
         SolidConfiguration configuration = new SolidConfiguration(new StringTemplateResourceLoader());
         TemplateResolver builder = new TemplateResolver(configuration);
         Template template = builder.resolve(templateString);
-        template.bind("published_at","785971906000");
+        template.bind("published_at", "785971906000");
         System.out.println(template.render());
     }
 
@@ -26,7 +24,7 @@ public class DateSolidMethodTest {
         SolidConfiguration configuration = new SolidConfiguration(new StringTemplateResourceLoader());
         TemplateResolver builder = new TemplateResolver(configuration);
         Template template = builder.resolve(templateString);
-        template.bind("published_at","785971906000");
+        template.bind("published_at", "785971906000");
         System.out.println(template.render());
     }
 

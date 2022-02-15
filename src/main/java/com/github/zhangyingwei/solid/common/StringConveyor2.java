@@ -1,15 +1,16 @@
 package com.github.zhangyingwei.solid.common;
 
-public class StringConveyor {
+public class StringConveyor2 {
+
     private int globalToIndex = 0;
     private int globalFromIndex = 0;
     private String template;
 
-    public StringConveyor(String template) {
+    public StringConveyor2(String template) {
         this.template = template;
     }
 
-    public StringConveyor getFromTo(String from, String to) {
+    public StringConveyor2 getFromTo(String from, String to) {
         getUntil(from, true);
         if (this.globalToIndex == this.templateLength()) {
             this.globalToIndex = this.globalFromIndex;
@@ -20,26 +21,7 @@ public class StringConveyor {
         return this;
     }
 
-    public StringConveyor getBetween(String from, String to) {
-        getUntil(from, true);
-        getUntil(to, false);
-        if (this.globalToIndex == this.templateLength()) {
-            this.globalToIndex = this.globalFromIndex;
-            return this;
-        }
-        return this;
-    }
-
-    /**
-     * 获取直到 unitStr 之前的字符串
-     * contain=true 包含untilStr
-     * contain=false 不包含untilStr
-     *
-     * @param untilStr
-     * @param contain
-     * @return
-     */
-    public StringConveyor getUntil(String untilStr, Boolean contain) {
+    public StringConveyor2 getUntil(String untilStr, Boolean contain) {
         this.globalFromIndex = this.globalToIndex;
         int strLength = untilStr.length();
         int length = this.templateLength();
@@ -53,9 +35,9 @@ public class StringConveyor {
                 }
             }
             if (eq) {
-                this.globalToIndex = i;
+                this.globalFromIndex = i;
                 if (contain) {
-                    this.globalToIndex += strLength;
+                    this.globalFromIndex += strLength;
                 }
                 break;
             }
@@ -70,20 +52,10 @@ public class StringConveyor {
         return this.template.length();
     }
 
-    /**
-     * 返回剩余字符串的长度
-     *
-     * @return
-     */
     public int length() {
         return this.template.length() - this.globalToIndex;
     }
 
-    /**
-     * 输出剩余的内容
-     *
-     * @return
-     */
     public String string() {
         return this.template.substring(this.globalToIndex);
     }
@@ -92,24 +64,12 @@ public class StringConveyor {
         return this.template.substring(this.globalFromIndex, this.globalToIndex);
     }
 
-    @Override
-    public String toString() {
-        return this.string();
-    }
-
-    public boolean startWith(String str) {
-        return this.string().startsWith(str);
-    }
-
-    public StringConveyor trimLeft() {
-        if (this.length() > 0) {
-            char cut = template.charAt(this.globalToIndex);
-            while (cut == ' ' && this.length() > 0) {
-                this.globalToIndex++;
-                if (this.length() > 0) {
-                    cut = template.charAt(this.globalToIndex);
-                }
-            }
+    public StringConveyor2 getBetween(String from, String to) {
+        getUntil(from, true);
+        getUntil(to, false);
+        if (this.globalToIndex == this.templateLength()) {
+            this.globalToIndex = this.globalFromIndex;
+            return this;
         }
         return this;
     }

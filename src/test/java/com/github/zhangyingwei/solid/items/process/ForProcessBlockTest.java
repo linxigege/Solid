@@ -8,8 +8,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 /**
  * @author: zhangyw
  * @date: 2018/7/3
@@ -21,7 +19,7 @@ public class ForProcessBlockTest {
     public void render() throws Exception {
         String topMark = "{% for item in items %}";
         SolidContext context = new SolidContext();
-        context.bindArgs("items",new ArrayList<String>(){
+        context.bindArgs("items", new ArrayList<String>() {
             {
                 add("a");
                 add("b");
@@ -29,15 +27,15 @@ public class ForProcessBlockTest {
                 add("d");
             }
         });
-        ForProcessBlock forProcessBlock = new ForProcessBlock(topMark,context);
-        ObjectBlock objectBlock = new ObjectBlock(context,"{{ item }}");
+        ForProcessBlock forProcessBlock = new ForProcessBlock(topMark, context);
+        ObjectBlock objectBlock = new ObjectBlock(context, "{{ item }}");
         TextBlock textBlock = new TextBlock("<a>");
         TextBlock textBlock2 = new TextBlock("<\\a>");
         forProcessBlock.addChildBlock(textBlock);
         forProcessBlock.addChildBlock(objectBlock);
         forProcessBlock.addChildBlock(textBlock2);
         System.out.println(forProcessBlock.render().getResult());
-        Assert.assertEquals(forProcessBlock.render().getResult(),"<a>a<\\a><a>b<\\a><a>c<\\a><a>d<\\a>");
+        Assert.assertEquals(forProcessBlock.render().getResult(), "<a>a<\\a><a>b<\\a><a>c<\\a><a>d<\\a>");
     }
 
     @Test
@@ -45,7 +43,7 @@ public class ForProcessBlockTest {
         String topMark = "{% for item in items %}";
         String topMark2 = "{% for item2 in items2 %}";
         SolidContext context = new SolidContext();
-        context.bindArgs("items",new ArrayList<String>(){
+        context.bindArgs("items", new ArrayList<String>() {
             {
                 add("a");
                 add("b");
@@ -53,7 +51,7 @@ public class ForProcessBlockTest {
                 add("d");
             }
         });
-        context.bindArgs("items2",new ArrayList<String>(){
+        context.bindArgs("items2", new ArrayList<String>() {
             {
                 add("1");
                 add("2");
@@ -61,11 +59,11 @@ public class ForProcessBlockTest {
                 add("4");
             }
         });
-        ForProcessBlock forProcessBlock = new ForProcessBlock(topMark,context);
-        ObjectBlock objectBlock = new ObjectBlock(context,"{{ item }}");
+        ForProcessBlock forProcessBlock = new ForProcessBlock(topMark, context);
+        ObjectBlock objectBlock = new ObjectBlock(context, "{{ item }}");
 
-        ForProcessBlock forProcessBlock2 = new ForProcessBlock(topMark2,context);
-        ObjectBlock objectBlock2 = new ObjectBlock(context,"{{ item2 }}");
+        ForProcessBlock forProcessBlock2 = new ForProcessBlock(topMark2, context);
+        ObjectBlock objectBlock2 = new ObjectBlock(context, "{{ item2 }}");
         forProcessBlock2.addChildBlock(objectBlock2);
 
         TextBlock textBlock = new TextBlock("<a>");
@@ -75,7 +73,7 @@ public class ForProcessBlockTest {
         forProcessBlock.addChildBlock(forProcessBlock2);
         forProcessBlock.addChildBlock(textBlock2);
         System.out.println(forProcessBlock.render().getResult());
-        Assert.assertEquals(forProcessBlock.render().getResult(),"<a>a1234<\\a><a>b1234<\\a><a>c1234<\\a><a>d1234<\\a>");
+        Assert.assertEquals(forProcessBlock.render().getResult(), "<a>a1234<\\a><a>b1234<\\a><a>c1234<\\a><a>d1234<\\a>");
     }
 
     @Test

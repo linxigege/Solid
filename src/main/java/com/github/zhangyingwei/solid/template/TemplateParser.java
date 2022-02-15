@@ -5,14 +5,10 @@ import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.common.SolidUtils;
 import com.github.zhangyingwei.solid.items.Block;
 import com.github.zhangyingwei.solid.items.object.ObjectBlock;
-import com.github.zhangyingwei.solid.items.process.ProcessBlock;
 import com.github.zhangyingwei.solid.items.text.TextBlock;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author zhangyw
@@ -23,6 +19,11 @@ public class TemplateParser {
 
     public TemplateParser(SolidContext context) {
         this.context = context;
+    }
+
+    public static void main(String[] args) {
+        StringBuilder builder = new StringBuilder("{{ user.name }} ");
+        System.out.println(builder.indexOf("{{"));
     }
 
     public List<Block> parse(String content) {
@@ -37,16 +38,16 @@ public class TemplateParser {
                 }
                 tempObj.append(templateFlow.pull(Constants.OBJ_RIGHTMARK.length()));
                 block = new ObjectBlock(this.context, tempObj.toString());
-            }else if (templateFlow.startWith(Constants.PROCESS_LEFTMARK)) {
+            } else if (templateFlow.startWith(Constants.PROCESS_LEFTMARK)) {
                 StringBuilder tempObj = new StringBuilder();
                 while (!templateFlow.startWith(Constants.PROCESS_RIGHTMARK)) {
                     tempObj.append(templateFlow.pull(1));
                 }
                 tempObj.append(templateFlow.pull(Constants.PROCESS_RIGHTMARK.length()));
-                block = SolidUtils.routeProcessBlock(tempObj.toString(),this.context);
-            }else{
+                block = SolidUtils.routeProcessBlock(tempObj.toString(), this.context);
+            } else {
                 StringBuilder tempObj = new StringBuilder();
-                while (!templateFlow.startWith(Constants.OBJ_LEFTMARK) && !templateFlow.startWith(Constants.PROCESS_LEFTMARK ) && templateFlow.isNotEmpty()) {
+                while (!templateFlow.startWith(Constants.OBJ_LEFTMARK) && !templateFlow.startWith(Constants.PROCESS_LEFTMARK) && templateFlow.isNotEmpty()) {
                     tempObj.append(templateFlow.pull(1));
                 }
                 block = new TextBlock(tempObj.toString());
@@ -58,6 +59,7 @@ public class TemplateParser {
 
     public static class TemplateFlow {
         StringBuilder contentBuilder;
+
         public TemplateFlow(String content) {
             this.contentBuilder = new StringBuilder(content);
         }
@@ -75,10 +77,5 @@ public class TemplateParser {
         public boolean isNotEmpty() {
             return this.contentBuilder.length() > 0;
         }
-    }
-
-    public static void main(String[] args) {
-        StringBuilder builder = new StringBuilder("{{ user.name }} ");
-        System.out.println(builder.indexOf("{{"));
     }
 }

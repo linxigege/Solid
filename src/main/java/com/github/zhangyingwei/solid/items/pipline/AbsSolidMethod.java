@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 /**
  * 取绝对值
+ *
  * @author zhangyw
  * @date 2018/7/3
  */

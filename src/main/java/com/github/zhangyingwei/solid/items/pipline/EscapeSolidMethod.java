@@ -6,11 +6,12 @@ import java.util.Map;
 
 /**
  * 追加
+ *
  * @author zhangyw
  * @date 2018/7/3
  */
 public class EscapeSolidMethod implements SolidMethod<String> {
-    private  static Map<String, String> ruleMap = new HashMap<String, String>();
+    private static Map<String, String> ruleMap = new HashMap<String, String>();
 
     public EscapeSolidMethod() {
         ruleMap.put("&", "&amp;");

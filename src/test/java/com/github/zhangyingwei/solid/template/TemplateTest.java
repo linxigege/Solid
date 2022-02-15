@@ -1,7 +1,7 @@
 package com.github.zhangyingwei.solid.template;
 
-import com.github.zhangyingwei.solid.config.SolidConfiguration;
 import com.github.zhangyingwei.solid.config.FileTemplateResourceLoader;
+import com.github.zhangyingwei.solid.config.SolidConfiguration;
 import com.github.zhangyingwei.solid.config.StringTemplateResourceLoader;
 import com.github.zhangyingwei.solid.demo.User;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class TemplateTest {
         resolver.setSuffix(".txt");
         Template template = resolver.resolve("template");
         template.bind("username", "JoinWe");
-        template.bind("password","123456");
+        template.bind("password", "123456");
         List<User> users = new ArrayList<User>();
         for (int i = 0; i < 10; i++) {
             User user = new User();
@@ -31,7 +31,7 @@ public class TemplateTest {
             user.setAge(i);
             users.add(user);
         }
-        template.bind("users",users);
+        template.bind("users", users);
         String result = template.render();
         System.out.println(result);
     }
@@ -45,7 +45,7 @@ public class TemplateTest {
         TemplateResolver builder = new TemplateResolver(configuration);
         Template template = builder.resolve("Hello my name is {{ user.name | append: \" wang \" }} and my age is {{user.age }} and my names length is {{ user.name | length }}. and my hobbies have {% for hobby in hobbies %} {{ hobby }} {% endfor %}. haha {{hobbies}} ");
         template.bind("user", user);
-        template.bind("hobbies",new ArrayList<String>(){
+        template.bind("hobbies", new ArrayList<String>() {
             {
                 add("足球");
                 add("篮球");
@@ -62,7 +62,7 @@ public class TemplateTest {
         resolver.setSuffix(".html");
         Template template = resolver.resolve("test");
         template.bind("username", "admin");
-        template.bind("password","密码");
+        template.bind("password", "密码");
         template.render();
         System.out.println(template.render());
     }
@@ -74,7 +74,7 @@ public class TemplateTest {
         resolver.setSuffix(".html");
         Template template = resolver.resolve("index");
         template.bind("username", "张英伟");
-        template.bind("password","123456password");
+        template.bind("password", "123456password");
         List<User> users = new ArrayList<User>();
         for (int i = 0; i < 10; i++) {
             User user = new User();
@@ -82,7 +82,7 @@ public class TemplateTest {
             user.setAge(i);
             users.add(user);
         }
-        template.bind("users",users);
+        template.bind("users", users);
         template.render();
         System.out.println(template.render());
     }

@@ -3,8 +3,6 @@ package com.github.zhangyingwei.solid.common;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class StringConveyorTest {
 
     private String template;
@@ -18,9 +16,9 @@ public class StringConveyorTest {
 
     @Test
     public void getUntil() {
-        String res = this.conveyor.getUntil("{{",false).result();
+        String res = this.conveyor.getUntil("{{", false).result();
         System.out.println(res);
-        String res2 = this.conveyor.getUntil("}}",true).result();
+        String res2 = this.conveyor.getUntil("}}", true).result();
         System.out.println(res2);
     }
 

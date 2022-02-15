@@ -31,13 +31,14 @@ public class SolidConfiguration {
     }
 
     private SolidConfiguration loadConfig(Properties configProperties) {
-        this.fillConfigOfConstants(configProperties,"template.suffix",Constants.TEMPLATE_SUFFIX);
-        this.fillConfigOfConstants(configProperties,"template.prefix",Constants.TEMPLATE_PREFIX);
+        this.fillConfigOfConstants(configProperties, "template.suffix", Constants.TEMPLATE_SUFFIX);
+        this.fillConfigOfConstants(configProperties, "template.prefix", Constants.TEMPLATE_PREFIX);
         return this;
     }
 
     /**
      * fill config if exits in config properties
+     *
      * @param configProperties
      * @param key
      * @param constants

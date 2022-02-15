@@ -7,13 +7,13 @@ package com.github.zhangyingwei.solid.config;
 public interface SolidTemplateResourcesLoader {
     String load(String source);
 
-    void setPrefix(String prefix);
-
-    void setSuffix(String suffix);
-
     String getPrefix();
 
+    void setPrefix(String prefix);
+
     String getSuffix();
+
+    void setSuffix(String suffix);
 
     String getBasePath();
 }

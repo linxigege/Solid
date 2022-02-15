@@ -1,7 +1,6 @@
 package com.github.zhangyingwei.solid;
 
 import com.github.zhangyingwei.solid.config.SolidTemplateResourcesLoader2;
-import com.github.zhangyingwei.solid.items.pipline.SolidMethod;
 import com.github.zhangyingwei.solid.items.pipline.SolidMethod2;
 
 import java.util.HashMap;
@@ -37,6 +36,10 @@ public class SolidContext2 {
         return params;
     }
 
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
+
     public SolidMethod2 getMethod(String key) {
         return methodMap.get(key);
     }
@@ -45,24 +48,20 @@ public class SolidContext2 {
         this.params.remove(itemName);
     }
 
-    public void setResourcesLoader(SolidTemplateResourcesLoader2 resourcesLoader) {
-        this.resourcesLoader = resourcesLoader;
-    }
-
     public SolidTemplateResourcesLoader2 getResourcesLoader() {
         return resourcesLoader;
     }
 
-    public void setParams(Map<String, Object> params) {
-        this.params = params;
-    }
-
-    public void setMethodMap(Map<String, SolidMethod2> methodMap) {
-        this.methodMap = methodMap;
+    public void setResourcesLoader(SolidTemplateResourcesLoader2 resourcesLoader) {
+        this.resourcesLoader = resourcesLoader;
     }
 
     public Map<String, SolidMethod2> getMethodMap() {
         return methodMap;
+    }
+
+    public void setMethodMap(Map<String, SolidMethod2> methodMap) {
+        this.methodMap = methodMap;
     }
 
 }

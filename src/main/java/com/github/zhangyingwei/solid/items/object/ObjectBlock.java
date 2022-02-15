@@ -3,13 +3,10 @@ package com.github.zhangyingwei.solid.items.object;
 import com.github.zhangyingwei.solid.SolidContext;
 import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.common.SolidUtils;
-import com.github.zhangyingwei.solid.exception.SolidException;
 import com.github.zhangyingwei.solid.items.Block;
 import com.github.zhangyingwei.solid.items.pipline.PiplineBlock;
-import com.github.zhangyingwei.solid.result.ObjectResult;
 import com.github.zhangyingwei.solid.result.SolidResult;
 import com.github.zhangyingwei.solid.result.StringResult;
-import com.github.zhangyingwei.solid.result.WowResult;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,7 +48,7 @@ public class ObjectBlock implements Block {
     }
 
     private List<PiplineBlock> bulidPipLines(List<String> items) {
-        return items.stream().map(item -> new PiplineBlock(item,context)).collect(Collectors.toList());
+        return items.stream().map(item -> new PiplineBlock(item, context)).collect(Collectors.toList());
     }
 
     @Override

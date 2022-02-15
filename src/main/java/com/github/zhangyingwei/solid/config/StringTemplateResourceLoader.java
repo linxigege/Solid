@@ -11,19 +11,21 @@ public class StringTemplateResourceLoader implements SolidTemplateResourcesLoade
     }
 
     @Override
-    public void setPrefix(String prefix) {}
-
-    @Override
-    public void setSuffix(String suffix) {}
-
-    @Override
     public String getPrefix() {
         return null;
     }
 
     @Override
+    public void setPrefix(String prefix) {
+    }
+
+    @Override
     public String getSuffix() {
         return null;
+    }
+
+    @Override
+    public void setSuffix(String suffix) {
     }
 
     @Override

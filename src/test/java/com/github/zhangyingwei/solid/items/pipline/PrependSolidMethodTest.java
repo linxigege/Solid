@@ -7,8 +7,6 @@ import com.github.zhangyingwei.solid.template.TemplateResolver;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class PrependSolidMethodTest {
     @Test
     public void test1() {
@@ -19,6 +17,7 @@ public class PrependSolidMethodTest {
         System.out.println(template.render());
         Assert.assertEquals(template.render(), "Some fruit: apples, oranges, and bananas");
     }
+
     @Test
     public void test2() {
         String templateString = "{% assign url = \"liquidmarkup.com\" %}" +

@@ -3,7 +3,6 @@ package com.github.zhangyingwei.solid.config;
 import com.github.zhangyingwei.solid.SolidContext2;
 import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.items.pipline.AppendSolidMethod2;
-import com.github.zhangyingwei.solid.items.pipline.ConcatSolidMethod;
 import com.github.zhangyingwei.solid.items.pipline.PrependSolidMethod2;
 import com.github.zhangyingwei.solid.items.pipline.SolidMethod2;
 
@@ -25,14 +24,14 @@ public class SolidConfiguration2 {
         this.init();
     }
 
+    public SolidConfiguration2(SolidContext2 context) {
+        this.context = context;
+    }
+
     private void init() {
         this.context.bindMethod("append", new AppendSolidMethod2());
         this.context.bindMethod("prepend", new PrependSolidMethod2());
 
-    }
-
-    public SolidConfiguration2(SolidContext2 context) {
-        this.context = context;
     }
 
     public SolidConfiguration2 loadConfig(String filePath) {

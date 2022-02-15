@@ -1,10 +1,10 @@
 package com.github.zhangyingwei.solid.items.pipline;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 追加
+ *
  * @author zhangyw
  * @date 2018/7/3
  */

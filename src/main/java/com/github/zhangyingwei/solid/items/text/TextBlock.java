@@ -37,7 +37,7 @@ public class TextBlock implements Block {
     }
 
     public boolean textIs(String other) {
-        return text.replaceAll(" ","").equals(other);
+        return text.replaceAll(" ", "").equals(other);
     }
 
     public String getText() {

@@ -12,8 +12,6 @@ import com.github.zhangyingwei.solid.template.TemplateResolver;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 /**
  * @author zhangyw
  * @date 2018/7/3
@@ -44,12 +42,12 @@ public class ObjectBlockTest {
         SolidContext context = new SolidContext();
         context.bindArgs("user", user);
         context.bindArgs("user1", user1);
-        context.bindMethod("append",new AppendSolidMethod());
+        context.bindMethod("append", new AppendSolidMethod());
         String template = "{{ user.name | append: \" === \" | append: user1.name}}";
         ObjectBlock objectBlock = new ObjectBlock(context, template);
         String result = objectBlock.render().getResult();
         System.out.println(result);
-        Assert.assertEquals(result,"xiaoming === baobo");
+        Assert.assertEquals(result, "xiaoming === baobo");
     }
 
     @Test
@@ -58,7 +56,7 @@ public class ObjectBlockTest {
         user.setName("xiaoming");
         SolidContext context = new SolidContext();
         context.bindArgs("user", user);
-        context.bindMethod("length",new LengthSolidMethod());
+        context.bindMethod("length", new LengthSolidMethod());
         String template = "{{ user.name | length }}";
         ObjectBlock objectBlock = new ObjectBlock(context, template);
         String result = objectBlock.render().getResult();

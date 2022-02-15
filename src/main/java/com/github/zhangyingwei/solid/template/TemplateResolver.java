@@ -23,6 +23,7 @@ public class TemplateResolver {
 
     /**
      * 根据 source 构建一个 template
+     *
      * @param source
      * @return
      */
@@ -33,13 +34,13 @@ public class TemplateResolver {
             template = null;//先把缓存的功能去掉
         }
         if (template == null) {
-            template = new Template(this.configuration,source);
+            template = new Template(this.configuration, source);
             if (this.contentType != null && this.contentType.length() > 0) {
                 template.setContentType(this.contentType);
             }
         }
         if (Constants.TEMPLATE_CACHE) {
-            templateCache.cache(source,template,Constants.KEY_TEMPLATE_TIMEOUT_MILLISECOND);
+            templateCache.cache(source, template, Constants.KEY_TEMPLATE_TIMEOUT_MILLISECOND);
         }
         return template;
     }

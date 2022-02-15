@@ -7,7 +7,6 @@ import com.github.zhangyingwei.solid.items.Block;
 import com.github.zhangyingwei.solid.result.SolidResult;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public abstract class ProcessBlock implements Block {
     protected boolean flag = true;
     private boolean deleteBlank = false;
 
-    public ProcessBlock(String topMark,SolidContext context) {
+    public ProcessBlock(String topMark, SolidContext context) {
         this.topMark = topMark;
         this.context = context;
         this.checkWhiteTag();
@@ -68,12 +67,12 @@ public abstract class ProcessBlock implements Block {
         return endTag;
     }
 
-    public String getTag() {
-        return tag;
-    }
-
     public void setEndTag(String endTag) {
         this.endTag = endTag;
+    }
+
+    public String getTag() {
+        return tag;
     }
 
     public Block setTag(String tag) {
@@ -99,7 +98,7 @@ public abstract class ProcessBlock implements Block {
                 Constants.PROCESS_LEFTMARK.concat(" ").concat(Constants.TAG_RAW).concat(" ").concat(Constants.PROCESS_RIGHTMARK)) ? "" : topMark).concat(String.join("", childsText));
     }
 
-    public boolean isNoEndBlock(){
+    public boolean isNoEndBlock() {
         return Constants.TAG_NO_END.equals(this.endTag);
     }
 }

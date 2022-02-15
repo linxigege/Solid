@@ -12,7 +12,6 @@ import com.github.zhangyingwei.solid.result.WowResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author zhangyw
@@ -20,13 +19,13 @@ import java.util.stream.Collectors;
  */
 public class PiplineBlock implements Block {
     private final SolidContext context;
+    protected Object input;
     private String methodName;
     private String[] args;
-    protected Object input;
 
     public PiplineBlock(String methodName, SolidContext context) {
         this.methodName = this.getMethod(methodName).trim();
-        String argsTemplate = methodName.replaceAll(this.methodName,"").trim();
+        String argsTemplate = methodName.replaceAll(this.methodName, "").trim();
         if (this.methodName.endsWith(":")) {
             this.args = this.splitArgs(argsTemplate);
         } else {
@@ -44,7 +43,7 @@ public class PiplineBlock implements Block {
                 result = conveyor.getFromTo("\"", "\"").result();
                 conveyor.getUntil(",", true);
             } else {
-                result = conveyor.getUntil(",",true).result();
+                result = conveyor.getUntil(",", true).result();
             }
             resultArgs.add(result.trim());
         }

@@ -1,17 +1,11 @@
 package com.github.zhangyingwei.solid.items.pipline;
 
-import com.github.zhangyingwei.solid.SolidContext;
 import com.github.zhangyingwei.solid.config.SolidConfiguration;
 import com.github.zhangyingwei.solid.config.StringTemplateResourceLoader;
-import com.github.zhangyingwei.solid.items.object.ObjectBlock;
 import com.github.zhangyingwei.solid.template.Template;
 import com.github.zhangyingwei.solid.template.TemplateResolver;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class AbsMethodTest {
 
@@ -32,7 +26,7 @@ public class AbsMethodTest {
         TemplateResolver builder = new TemplateResolver(configuration);
         Template template = builder.resolve(templateString);
         System.out.println(template.render());
-        Assert.assertEquals(template.render(),"4");
+        Assert.assertEquals(template.render(), "4");
     }
 
     @Test

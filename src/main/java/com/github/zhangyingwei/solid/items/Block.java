@@ -8,6 +8,8 @@ import com.github.zhangyingwei.solid.result.SolidResult;
  */
 public interface Block {
     Block setFlag(boolean flag);
+
     SolidResult render();
+
     String text();
 }

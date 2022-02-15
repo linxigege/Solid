@@ -12,10 +12,16 @@ import com.github.zhangyingwei.solid.items.text.TextBlock;
 import com.github.zhangyingwei.solid.result.*;
 import com.github.zhangyingwei.solid.template.TemplateResolver;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -26,15 +32,16 @@ import java.util.stream.Collectors;
 public class SolidUtils {
 
     /**
-     *  get value from context
+     * get value from context
+     *
      * @param template
      * @param context
      * @return
      */
     private static SolidResult<Object> getObjectFromContext(String template, SolidContext context) {
         StringConveyor conveyor = new StringConveyor(template);
-        String fatherTemplate = conveyor.getUntil("[",false).result().trim();
-        String childTemplate = conveyor.getBetween("[","]").result().trim();
+        String fatherTemplate = conveyor.getUntil("[", false).result().trim();
+        String childTemplate = conveyor.getBetween("[", "]").result().trim();
         String[] objectKeys = fatherTemplate.split("\\.");
         Object tempValue = context.getParams();
         for (String objectKey : objectKeys) {
@@ -60,6 +67,7 @@ public class SolidUtils {
 
     /**
      * get value from object
+     *
      * @param object
      * @param key
      * @return
@@ -81,6 +89,7 @@ public class SolidUtils {
 
     /**
      * get value from object
+     *
      * @param object
      * @param key
      * @return
@@ -96,7 +105,7 @@ public class SolidUtils {
         }
         Class<? extends Object> clazz = object.getClass();
         String methodName = "get".concat(
-                key.substring(0,1).toUpperCase().concat(key.substring(1).toLowerCase())
+                key.substring(0, 1).toUpperCase().concat(key.substring(1).toLowerCase())
         );
         try {
             Method method = clazz.getMethod(methodName);
@@ -120,7 +129,7 @@ public class SolidUtils {
         if (command.startsWith(Constants.TAG_FOR)) {
             return new ForProcessBlock(template, context);
         } else if (command.startsWith(Constants.TAG_FOR_END)) {
-            return new EndProcessBlock(template,context).setTag(Constants.TAG_FOR_END);
+            return new EndProcessBlock(template, context).setTag(Constants.TAG_FOR_END);
         } else if (command.startsWith(Constants.TAG_IF)) {
             return new IFProcessBlock(template, context);
         } else if (command.startsWith(Constants.TAG_ELSE_IF)) {
@@ -143,6 +152,7 @@ public class SolidUtils {
 
     /**
      * 去掉多余的空格
+     *
      * @param content
      * @return
      */
@@ -159,6 +169,7 @@ public class SolidUtils {
 
     /**
      * 是否为占位符
+     *
      * @return
      */
     private static Boolean isPlaceholder(String text) {
@@ -171,16 +182,17 @@ public class SolidUtils {
      * 1. is template is placeholder ?
      * 2. if true ,get result of placeholder from context
      * 3. if not , return template itself
+     *
      * @param context
      * @param template
      * @return
      */
-    public static SolidResult getFromPlaceholderOrNot(SolidContext context,String template) {
+    public static SolidResult getFromPlaceholderOrNot(SolidContext context, String template) {
         if (template == null || template.length() == 0) {
             return new StringResult("");
-        }else if (isNum(template.trim())){
+        } else if (isNum(template.trim())) {
             return new NumResult(template);
-        }else if (isPlaceholder(template)) {
+        } else if (isPlaceholder(template)) {
             return getObjectFromContext(template, context);
         } else {
             return new StringResult(template.substring(1, template.length() - 1));
@@ -189,6 +201,7 @@ public class SolidUtils {
 
     /**
      * the text is num or not?
+     *
      * @return
      */
     public static Boolean isNum(String text) {
@@ -229,11 +242,12 @@ public class SolidUtils {
 
 
     public static void main(String[] args) {
-        System.out.println(readContentFromFile("src/main/resources/test.html",Constants.CHAR_SET_UTF_8));
+        System.out.println(readContentFromFile("src/main/resources/test.html", Constants.CHAR_SET_UTF_8));
     }
 
     /**
      * {% template %} => template
+     *
      * @param mark
      * @param leftMark
      * @param rightMark

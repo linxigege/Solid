@@ -22,7 +22,7 @@ public class ForProcessBlock extends ProcessBlock {
     private Object sources;
 
     public ForProcessBlock(String topMark, SolidContext context) {
-        super(topMark,context);
+        super(topMark, context);
         super.tag = Constants.TAG_FOR;
         super.endTag = Constants.TAG_FOR_END;
         this.getNames(topMark);
@@ -59,7 +59,7 @@ public class ForProcessBlock extends ProcessBlock {
             }
         } else {
             try {
-                throw new SolidParamNotFoundException(sourcesName+" is not collection or arrray");
+                throw new SolidParamNotFoundException(sourcesName + " is not collection or arrray");
             } catch (SolidParamNotFoundException e) {
                 e.printStackTrace();
             }

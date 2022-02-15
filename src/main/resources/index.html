@@ -10,7 +10,7 @@ page:true
     <meta charset="UTF-8">
     <title>index</title>
     <style type="text/css">
-        .hello{
+        .hello {
             background-color: azure;
             padding: 10px;
             font-size: 20px;
@@ -25,26 +25,27 @@ page:true
 <div class="container">
     <table border="1">
         <thead>
-            <tr>
-                <td>Name</td>
-                <td>Age</td>
-            </tr>
+        <tr>
+            <td>Name</td>
+            <td>Age</td>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
-                <td>{{user.name}}</td>
-                {% if user.age == 5 %}
-                    <td>binggo</td>
-                {% else %}
-                    <td>{{user.age}}</td>
-                {% endif %}
-            </tr>
+        <tr>
+            <td>{{user.name}}</td>
+            {% if user.age == 5 %}
+            <td>binggo</td>
+            {% else %}
+            <td>{{user.age}}</td>
+            {% endif %}
+        </tr>
         {% endfor %}
         </tbody>
     </table>
     {% assign code="20001" %}
-    {% include test.html text="this is include text hahahaha" text2 = "haha this is include text too" text3 = {{ code }} %}
+    {% include test.html text="this is include text hahahaha" text2 = "haha this is include text too" text3 = {{ code }}
+    %}
 </div>
 </body>
 </html>

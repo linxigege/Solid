@@ -1,10 +1,7 @@
 package com.github.zhangyingwei.solid.template;
 
-/**
- * @author zhangyw
- * @date 2018/7/4
- */
-public interface SolidTemplate {
+public interface SolidTemplate2 {
+
     void bind(String key, Object value);
 
     String render();

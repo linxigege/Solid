@@ -1,7 +1,5 @@
 package com.github.zhangyingwei.solid.result;
 
-import java.util.Objects;
-
 /**
  * @author zhangyw
  * @date 2018/7/3

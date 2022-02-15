@@ -9,5 +9,4 @@ package com.github.zhangyingwei.solid.template;
 public class Test {
 
 
-
 }

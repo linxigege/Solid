@@ -5,11 +5,11 @@ import com.github.zhangyingwei.solid.common.SolidUtils;
 import com.github.zhangyingwei.solid.common.StringConveyor;
 import com.github.zhangyingwei.solid.config.SolidConfiguration;
 import com.github.zhangyingwei.solid.items.Block;
-import com.github.zhangyingwei.solid.items.process.*;
+import com.github.zhangyingwei.solid.items.process.EndProcessBlock;
+import com.github.zhangyingwei.solid.items.process.ProcessBlock;
 import com.github.zhangyingwei.solid.items.text.TextBlock;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author zhangyw
@@ -107,6 +107,7 @@ public class Template implements SolidTemplate {
 
     /**
      * bulid blocks as a tree
+     *
      * @param rootBlock
      * @param blockStack
      */
@@ -145,12 +146,12 @@ public class Template implements SolidTemplate {
         return null;
     }
 
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
     public String getContentType() {
         return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     /**
@@ -161,7 +162,7 @@ public class Template implements SolidTemplate {
      * ---
      */
     class Header {
-        Map<String, String> params = new HashMap<String,String>();
+        Map<String, String> params = new HashMap<String, String>();
         private String template;
         private TemplateResolver layoutResolver;
 
@@ -178,7 +179,7 @@ public class Template implements SolidTemplate {
             while (conveyor.length() > 0) {
                 String key = conveyor.getUntil(":", false).result();
                 conveyor.getUntil(":", true);
-                String value = conveyor.getUntil(Constants.Wrap(),false).result();
+                String value = conveyor.getUntil(Constants.Wrap(), false).result();
                 conveyor.getUntil(Constants.Wrap(), true);
                 params.put(key, value);
             }
@@ -189,7 +190,7 @@ public class Template implements SolidTemplate {
         }
 
         SolidTemplate template() {
-            Map<String,String> page = new HashMap<String, String>(params);
+            Map<String, String> page = new HashMap<String, String>(params);
             page.remove("layout");
 //            bind("page",page);
             page.entrySet().stream().forEach(e -> {

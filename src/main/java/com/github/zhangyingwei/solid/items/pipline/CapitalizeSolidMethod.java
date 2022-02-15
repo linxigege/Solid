@@ -2,6 +2,7 @@ package com.github.zhangyingwei.solid.items.pipline;
 
 /**
  * 首字母大写
+ *
  * @author zhangyw
  * @date 2018/7/3
  */
