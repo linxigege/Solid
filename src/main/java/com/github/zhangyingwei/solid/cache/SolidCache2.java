@@ -15,7 +15,30 @@ public class SolidCache2 {
         this.startCleaner();
     }
 
-//    public void cache(String key,Object)
+    public void cache(String key,Object value){
+        cache.put(key,value);
+    }
+
+    public Object get(String key){
+        if (cacheTimeout.contains(key)){
+            if (isTimeOut(key)){
+                return null;
+            }else{
+                return cache.get(key);
+            }
+        }else{
+            return cache.get(key);
+        }
+    }
+
+    private boolean isTimeOut(String key){
+        return System.currentTimeMillis()>cacheTimeout.get(key);
+    }
+
+    public void cache (String key, Object value,long timeout){
+        cache.put(key,value);
+        cacheTimeout.put(key,System.currentTimeMillis()+timeout);
+    }
 
     private void startCleaner() {
         new Thread(() -> {
@@ -33,7 +56,7 @@ public class SolidCache2 {
     private void cleanCache(){
         List<String> timeOutKeys = new ArrayList<>();
         for (Map.Entry<String, Long> entry : cacheTimeout.entrySet()) {
-            long out = entry.getValue();
+            Long out = entry.getValue();
             if (System.currentTimeMillis()>out){
                 timeOutKeys.add(entry.getKey());
             }
