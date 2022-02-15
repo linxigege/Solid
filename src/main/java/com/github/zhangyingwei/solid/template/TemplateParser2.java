@@ -6,6 +6,9 @@ import com.github.zhangyingwei.solid.common.Constants2;
 import com.github.zhangyingwei.solid.common.SolidUtils2;
 import com.github.zhangyingwei.solid.items.Block2;
 import com.github.zhangyingwei.solid.items.object.ObjectBlock;
+import com.github.zhangyingwei.solid.items.object.ObjectBlock2;
+import com.github.zhangyingwei.solid.items.text.TextBlock;
+import com.github.zhangyingwei.solid.items.text.TextBlock2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +37,24 @@ public class TemplateParser2 {
                     tempObj.append(templateFlow2.pull(1));
                 }
                 tempObj.append(templateFlow2.pull(Constants2.OBJ_RIGHTMARK.length()));
-                block2 = new ObjectBlock(this.context2,tempObj.toString());
+                block2 = new ObjectBlock2(this.context2,tempObj.toString());
             }else if (templateFlow2.startWith(Constants2.PROCESS_LEFTMARK)){
                 StringBuilder tempObj = new StringBuilder();
                 while (!templateFlow2.startWith(Constants2.PROCESS_RIGHTMARK)){
                     tempObj.append(templateFlow2.pull(1));
                 }
                 tempObj.append(templateFlow2.pull(Constants2.PROCESS_RIGHTMARK.length()));
-                block2 = SolidUtils2.route
+                block2 = SolidUtils2.routeProcessBlock(tempObj.toString(),this.context2);
+            }else{
+                StringBuilder tempObj = new StringBuilder();
+                while (!templateFlow2.startWith(Constants2.OBJ_LEFTMARK)&&!templateFlow2.startWith(Constants2.PROCESS_LEFTMARK)){
+                    tempObj.append(templateFlow2.pull(1));
+                }
+                block2 = new TextBlock2(tempObj.toString());
             }
+            block2s.add(block2);
         }
+        return block2s;
     }
 
     public static class TemplateFlow2 {

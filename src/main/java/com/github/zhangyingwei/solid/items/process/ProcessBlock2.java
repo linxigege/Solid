@@ -1,11 +1,15 @@
 package com.github.zhangyingwei.solid.items.process;
 
 import com.github.zhangyingwei.solid.SolidContext2;
+import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.common.Constants2;
+import com.github.zhangyingwei.solid.common.SolidUtils2;
 import com.github.zhangyingwei.solid.items.Block2;
+import com.github.zhangyingwei.solid.result.SolidResult2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class ProcessBlock2 implements Block2 {
 
@@ -39,5 +43,37 @@ public abstract class ProcessBlock2 implements Block2 {
         }
     }
 
-//    protected
+    protected List<SolidResult2> childsResult(boolean ifture) {
+        return childBlocks.stream().map(child -> {
+            if (child instanceof ElsIFProcessBlock2 || child instanceof ElsIFProcessBlock2) {
+                return child.setFlag(!ifture).render();
+            } else {
+                return child.setFlag(ifture).render();
+            }
+        }).collect(Collectors.toList());
+    }
+
+    public void addChildBlock(Block2 block2){
+        this.childBlocks.add(block2);
+    }
+
+    public boolean isDeleteBlank() {
+        return deleteBlank;
+    }
+
+    public String getEndTag(){
+        return endTag;
+    }
+
+
+    @Override
+    public String text(){
+        List<String> childsText = childBlocks.stream().map(child -> child.text()).collect(Collectors.toList());
+        return (SolidUtils2.formateAsNomal(topMark).equals(
+                Constants.PROCESS_LEFTMARK.
+                        concat(" ").concat(Constants2.TAG_RAW).
+                        concat(" ").
+                        concat(Constants2.PROCESS_RIGHTMARK))?"":topMark)
+                .concat(String.join("",childsText));
+    }
 }

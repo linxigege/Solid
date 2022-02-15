@@ -95,7 +95,10 @@ public abstract class ProcessBlock implements Block {
     public String text() {
         List<String> childsText = childBlocks.stream().map(child -> child.text()).collect(Collectors.toList());
         return (SolidUtils.formateAsNomal(topMark).equals(
-                Constants.PROCESS_LEFTMARK.concat(" ").concat(Constants.TAG_RAW).concat(" ").concat(Constants.PROCESS_RIGHTMARK)) ? "" : topMark).concat(String.join("", childsText));
+                Constants.PROCESS_LEFTMARK.
+                        concat(" ").concat(Constants.TAG_RAW).concat(" ").
+                        concat(Constants.PROCESS_RIGHTMARK)) ? "" : topMark).
+                concat(String.join("", childsText));
     }
 
     public boolean isNoEndBlock() {
