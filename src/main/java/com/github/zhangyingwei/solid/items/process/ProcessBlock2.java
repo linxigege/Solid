@@ -39,5 +39,5 @@ public abstract class ProcessBlock2 implements Block2 {
         }
     }
 
-    protected
+//    protected
 }
