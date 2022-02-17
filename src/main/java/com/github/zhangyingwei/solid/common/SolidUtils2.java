@@ -57,9 +57,9 @@ public class SolidUtils2 {
         String command = String.join(" ", commandItemList);
 
         if (command.startsWith(Constants2.TAG_FOR)) {
-            return new ForProcessBlock(template, context2);
+            return new ForProcessBlock2(template, context2);
         } else if (command.startsWith(Constants2.TAG_FOR_END)) {
-            return new EndProcessBlock(template, context2).setTag(Constants2.TAG_FOR_END);
+            return new EndProcessBlock2(template, context2).setTag(Constants2.TAG_FOR_END);
         } else if (command.startsWith(Constants2.TAG_IF)) {
             return new IFProcessBlock(template, context2);
         } else if (command.startsWith(Constants2.TAG_ELSE_IF)) {

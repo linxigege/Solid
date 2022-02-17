@@ -1,21 +1,27 @@
 package com.github.zhangyingwei.solid.items.process;
 
 import com.github.zhangyingwei.solid.SolidContext;
+import com.github.zhangyingwei.solid.SolidContext2;
 import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.common.Constants2;
-import com.github.zhangyingwei.solid.common.SolidUtils;
 import com.github.zhangyingwei.solid.common.SolidUtils2;
-import com.github.zhangyingwei.solid.result.SolidResult;
-import com.github.zhangyingwei.solid.result.StringResult;
+import com.github.zhangyingwei.solid.exception.SolidParamNotFoundException;
+import com.github.zhangyingwei.solid.items.Block2;
+import com.github.zhangyingwei.solid.result.SolidResult2;
+import com.github.zhangyingwei.solid.result.StringResult2;
 
-public class ForProcessBlock2 extends ProcessBlock {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class ForProcessBlock2 extends ProcessBlock2 {
 
     private String itemName;
     private String sourcesName;
     private Object sources;
 
-    public ForProcessBlock2(String topMark, SolidContext context) {
-        super(topMark, context);
+    public ForProcessBlock2(String topMark, SolidContext2 context2) {
+        super(topMark, context2);
         super.tag = Constants2.TAG_FOR;
         super.endTag = Constants.TAG_FOR_END;
         this.getNames(topMark);
@@ -29,10 +35,45 @@ public class ForProcessBlock2 extends ProcessBlock {
     }
 
     @Override
-    public SolidResult render() {
-        if (!flag){
-            return new StringResult("");
+    public Block2 setFlag(boolean flag) {
+        return null;
+    }
+
+    @Override
+    public SolidResult2 render() {
+        if (!flag) {
+            return new StringResult2("");
         }
-        SolidUtils2.getF
+        SolidResult2<Object> sourcesResult = SolidUtils2.getFromPlaceHolderOrNot(super.context2, sourcesName);
+        this.sources = sourcesResult.getResult();
+        List<SolidResult2> childs = new ArrayList<>();
+        if (this.sources instanceof Collection) {
+            Collection collection = (Collection) this.sources;
+            for (Object object : collection) {
+                context2.bindArgs(this.itemName, object);
+                childs.addAll(super.childsResult(true));
+                context2.unbindArgs(this.itemName);
+            }
+        } else if (this.sources.getClass().isArray()) {
+            Object[] objects = (Object[]) this.sources;
+            for (Object object : objects) {
+                context2.bindArgs(this.itemName, object);
+                childs.addAll(super.childsResult(true));
+                context2.unbindArgs(this.itemName);
+            }
+        } else {
+            try {
+                throw new SolidParamNotFoundException(sourcesName + "is not collection or array");
+            } catch (SolidParamNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        StringBuilder sBuilder = new StringBuilder();
+        childs.stream().forEach(child -> {
+            sBuilder.append(child.getResult());
+        });
+
+        return new StringResult2(sBuilder.toString());
     }
 }

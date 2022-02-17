@@ -4,6 +4,7 @@ import com.github.zhangyingwei.solid.SolidContext2;
 import com.github.zhangyingwei.solid.common.Constants;
 import com.github.zhangyingwei.solid.common.Constants2;
 import com.github.zhangyingwei.solid.common.SolidUtils2;
+import com.github.zhangyingwei.solid.items.Block;
 import com.github.zhangyingwei.solid.items.Block2;
 import com.github.zhangyingwei.solid.result.SolidResult2;
 
@@ -75,5 +76,14 @@ public abstract class ProcessBlock2 implements Block2 {
                         concat(" ").
                         concat(Constants2.PROCESS_RIGHTMARK))?"":topMark)
                 .concat(String.join("",childsText));
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public Block2 setTag(String tag) {
+        this.tag = tag;
+        return this;
     }
 }
