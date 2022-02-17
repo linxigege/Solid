@@ -44,7 +44,7 @@ public class Template2 implements SolidTemplate2 {
             Block2 fater = block2s.get(i + 2);
             if (current instanceof ProcessBlock2){
                 ProcessBlock2 currentProcess = (ProcessBlock2) current;
-                if (currentProcess)
+//                if (currentProcess)
             }
         }
     }
